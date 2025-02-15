@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+openai.api_key = os.getenv("OPENAI_API_KEY") 
 
-openai.api_key = os.getenv() #need to get key
+app = Flask(__name__)
 
 if not openai.api_key: 
     raise ValueError("Your OpenAI API key is either missing or incorrect.")
@@ -31,3 +31,5 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True) #chnage this to flase during production
+    
+
