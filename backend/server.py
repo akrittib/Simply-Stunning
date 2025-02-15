@@ -9,6 +9,8 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__)
 
+openai.api_key = os.getenv() #need to get key
+
 if not openai.api_key: 
     raise ValueError("Your OpenAI API key is either missing or incorrect.")
 
