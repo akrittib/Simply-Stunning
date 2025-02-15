@@ -7,8 +7,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-OPENAI_API_KEY= "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"
-
 openai.api_key = os.getenv(OPENAI_API_KEY) #need to get key
 
 if not openai.api_key: 
