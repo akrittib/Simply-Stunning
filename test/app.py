@@ -3,33 +3,33 @@ import streamlit as st
 from dotenv import load_dotenv
 from google import genai
 
-# Load environment variables from .env file
-load_dotenv()
+# # Load environment variables from .env file
+# load_dotenv()
 
-# Set the Gemini API key from environment variables
-gemini_key = os.getenv("GEMINI_API_KEY")
+# # Set the Gemini API key from environment variables
+# gemini_key = os.getenv("GEMINI_API_KEY")
 
-if not gemini_key:
-    st.error("Your Gemini API key is either missing or incorrect.")
-    st.stop()
+# if not gemini_key:
+#     st.error("Your Gemini API key is either missing or incorrect.")
+#     st.stop()
 
-# Initialize Gemini API client
-genai.api_key = gemini_key
+# # Initialize Gemini API client
+# genai.api_key = gemini_key
 
-# Read system prompt from a file
-system_path = os.path.join("prompts", "system.txt")
-query_path = os.path.join("prompts", "query.txt")
+# # Read system prompt from a file
+# system_path = os.path.join("prompts", "system.txt")
+# query_path = os.path.join("prompts", "query.txt")
 
-try:
-    with open(system_path, "r") as file:
-        system_prompt = file.read()
+# try:
+#     with open(system_path, "r") as file:
+#         system_prompt = file.read()
 
-    with open(query_path, "r") as file:
-        query_prompt = file.read()
+#     with open(query_path, "r") as file:
+#         query_prompt = file.read()
 
-except FileNotFoundError:
-    st.error("Prompt files missing")
-    st.stop()
+# except FileNotFoundError:
+#     st.error("Prompt files missing")
+#     st.stop()
 
 # Streamlit app
 st.title("Simply Stunning!")
