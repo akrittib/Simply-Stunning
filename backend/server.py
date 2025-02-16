@@ -39,17 +39,20 @@ def chat():
     except FileNotFoundError:
         return jsonify({"error": "Prompt files missing"}), 500
 
-    response = genai.models.generate_content(
-        model="gemini-2.0-flash",  # Ensure you have access to this model
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message},
-        ]
-    )
+    try:
+        response = genai.models.generate_content(
+            model="gemini-2.0-flash",  # Ensure you have access to this model
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message},
+            ]
+        )
 
-    bot_response = response["choices"][0]["message"]["content"]
-    
-    return jsonify({"bot_response": bot_response})
+        bot_response = response["choices"][0]["message"]["content"]
+        return jsonify({"bot_response": bot_response})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)  # Change this to False during production

@@ -37,15 +37,6 @@
     <div id="chatResponse"></div>
   </section>
 
-  <section id="resources">
-    <h2>🌿 Wellness Resources</h2>
-    <p>💆‍♀️ <strong>Relaxation:</strong> <a href="https://www.mindful.org" target="_blank">Meditation & Breathing Exercises</a></p>
-    <p>🍎 <strong>Nutrition:</strong> <a href="https://www.healthline.com/nutrition" target="_blank">Healthy Food Choices</a></p>
-    <p>🏋️‍♂️ <strong>Movement:</strong> <a href="https://www.self.com/fitness" target="_blank">Easy Workouts</a></p>
-    <p>📖 <strong>Inspiration:</strong> <a href="https://www.brainyquote.com/topics/self-love-quotes" target="_blank">Self-Love Quotes</a></p>
-    <p>📝 <strong>Journaling:</strong> <a href="https://positivepsychology.com/journaling" target="_blank">Daily Journaling for Positivity</a></p>
-  </section>
-
   <script>
     document.getElementById('sendMessageButton').addEventListener('click', async () => {
       const userMessage = document.getElementById('userMessage').value;
@@ -60,8 +51,12 @@
           body: JSON.stringify({ message: userMessage })
         });
 
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
-        responseDiv.innerHTML = `<p>${data.bot_response}</p>`;
+        responseDiv.innerHTML = `<p>${data.bot_response || data.error}</p>`;
       } catch (error) {
         responseDiv.innerHTML = `<p>Error: ${error.message}</p>`;
       }
