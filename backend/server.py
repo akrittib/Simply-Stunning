@@ -1,16 +1,16 @@
 import os
 from flask import Flask, request, jsonify, render_template
-import openai
+from google import genai
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Set the OpenAI API key from environment variables
-openai.api_key = os.getenv("OPENAI_API_KEY")
+gemini_key = os.getenv("GEMINI_API_KEY")
 
-if not openai.api_key: 
-    raise ValueError("Your OpenAI API key is either missing or incorrect.")
+if not gemini_key: 
+    raise ValueError("Your Gemini API key is either missing or incorrect.")
 
 app = Flask(__name__)
 
@@ -36,8 +36,8 @@ def chat():
     except FileNotFoundError:
         return jsonify({"error": "Prompt files missing"}), 500
 
-    response = openai.ChatCompletion.create(
-        model= "gpt-4o", #still need to get key so this may change
+    response = genai.models.generate_content(
+        model= "gemini-2.0-flash", #still need to get key so this may change
         messages= [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_message},
@@ -50,4 +50,3 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True) #chnage this to flase during production
-
