@@ -1,0 +1,64 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #C7F2C2, #A2E4B8, #E4F9D4);
+    color: #444;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #D8BFD8;
+    padding: 20px;
+    border-radius: 0 0 20px 20px;
+    color: white;
+}
+
+nav {
+    margin: 20px;
+}
+nav a, nav button {
+    margin: 10px;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    background: #FFD700;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+nav button:hover {
+    background: #9370DB;
+    color: white;
+}
+
+section {
+    padding: 50px;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#about {
+    background: #E6E6FA;
+}
+
+#resources {
+    background: #FFDDC1;
+}
+
+#chatButton {
+    background: #9370DB;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+section p {
+    margin: 10px 0;
+}
+
+
