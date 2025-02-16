@@ -27,11 +27,14 @@
   <section id="about">
     <h2>💜 About Simply Stunning!</h2>
     <p>Simply Stunning is all about self-love, body positivity, and mental wellness. Our mission is to empower individuals by providing valuable resources, motivation, and a supportive community.</p>
-    <p>🌱 Building self-confidence</p>
-    <p>🧘‍♀️ Practicing mindfulness</p>
-    <p>💪 Staying active with movement</p>
-    <p>🥗 Nourishing with healthy food</p>
-    <p>Start your journey today and embrace the beauty within you! 🌟</p>
+  </section>
+
+  <!-- Add a chat section -->
+  <section id="chat">
+    <h2>💬 Chat with SanaBot</h2>
+    <textarea id="userMessage" placeholder="Type your message here..."></textarea>
+    <button id="sendMessageButton">Send</button>
+    <div id="chatResponse"></div>
   </section>
 
   <section id="resources">
@@ -43,6 +46,26 @@
     <p>📝 <strong>Journaling:</strong> <a href="https://positivepsychology.com/journaling" target="_blank">Daily Journaling for Positivity</a></p>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('sendMessageButton').addEventListener('click', async () => {
+      const userMessage = document.getElementById('userMessage').value;
+      const responseDiv = document.getElementById('chatResponse');
+
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: userMessage })
+        });
+
+        const data = await response.json();
+        responseDiv.innerHTML = `<p>${data.bot_response}</p>`;
+      } catch (error) {
+        responseDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+      }
+    });
+  </script>
 </body>
 </html>
