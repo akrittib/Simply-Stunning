@@ -1,18 +1,24 @@
 import os
 from flask import Flask, request, jsonify, render_template
-from google import genai
+from flask_cors import CORS
 from dotenv import load_dotenv
+from google import genai
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Set the OpenAI API key from environment variables
+# Set the Gemini API key from environment variables
 gemini_key = os.getenv("GEMINI_API_KEY")
 
 if not gemini_key: 
     raise ValueError("Your Gemini API key is either missing or incorrect.")
 
+# Initialize Gemini API client
+client = genai.Client(api_key=gemini_key,
+                      http_options={'api_version': 'v1alpha'})
+
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route("/")  # Root URL for the home page
 def home(): 
@@ -36,17 +42,17 @@ def chat():
     except FileNotFoundError:
         return jsonify({"error": "Prompt files missing"}), 500
 
-    response = genai.models.generate_content(
-        model= "gemini-2.0-flash", #still need to get key so this may change
-        messages= [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message},
-        ]   
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",  # Ensure you have access to this model
+        contents=[
+            system_prompt,
+            user_message
+        ]
     )
 
-    bot_response = response["choices"][0]["message"]["content"]
+    bot_response = response.text
     
     return jsonify({"bot_response": bot_response})
 
 if __name__ == "__main__":
-    app.run(debug=True) #chnage this to flase during production
+    app.run(debug=True)  # Change this to False during production
