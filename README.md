@@ -22,7 +22,7 @@ youtube.com/watch?v=WRol0Yfwp6k
 
 ## Team Members ## 
 Akriti Batra - backend developer and presenter
-Abigail Louie - backend dveloper 
+Abigail Louie - backend developer 
 Lovepreet Kaur - frontend developer 
 Tiffany Zeng - designer
 
